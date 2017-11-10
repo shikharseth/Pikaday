@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <title>Pikaday - weeknumbers example</title>
+    <meta name="author" content="Maxime Thirouin">
+    <link rel="stylesheet" href="../css/pikaday.css">
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+
+<body>
+
+    <h1>Pikaday - selecting weeknumbers selects the whole week</h1>
+
+
+    <label for="datepicker">Date:</label>
+    <input type="text" id="datepicker">
+
+    <script src="../pikaday-new.js"></script>
+    <script>
+        var field = document.getElementById('datepicker');
+        var pickerWeekNums = new Pikaday({
+            showWeekNumber: true,
+            field: field,
+            onSelect: function(date) {
+                var sundayDate = date.getDate() - date.getDay();
+                var sunday = new Date(date.setDate(sundayDate));
+                var saturday = new Date(date.setDate(sundayDate + 6));
+                field.value = sunday.toLocaleDateString() + ' - ' + saturday.toLocaleDateString();
+            }
+        });
+    </script>
+</body>
+
+</html>
